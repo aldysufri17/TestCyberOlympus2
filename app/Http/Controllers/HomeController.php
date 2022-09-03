@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Order;
 use App\OrderDetail;
 use App\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,13 +26,6 @@ class HomeController extends Controller
         return view('product', compact('product'));
     }
 
-
-    public function detailProduct($id)
-    {
-        $product = Product::whereId($id)->first();
-        return view('detail-product', compact('product'));
-    }
-
     public function customer()
     {
         $orders = Order::select('customer_id', 'name', DB::raw('COUNT(invoice_id) as total'))
@@ -48,5 +42,33 @@ class HomeController extends Controller
             ->orderBy('total', 'desc')
             ->paginate(10);
         return view('agent', compact('orders'));
+    }
+
+    public function order()
+    {
+        $orders = Order::orderBy('order_time', 'desc')->paginate(10);
+        return view('orders', compact('orders'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->name;
+        $orders = Order::where('name', 'like', "%" . $search . "%")
+            ->paginate(10);
+        return view('orders', compact('orders'));
+    }
+
+    public function filter()
+    {
+        $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
+        $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
+        $orders = Order::whereBetween('order_time', [$start_date, $end_date])->paginate(10);
+        return view('orders', compact('orders'));
+    }
+
+    public function orderDetail($id)
+    {
+        $order = Order::whereId($id)->first();
+        return view('order-detail', compact('order'));
     }
 }

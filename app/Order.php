@@ -11,6 +11,7 @@ class Order extends Model
     {
         return $this->belongsTo('App\customer', 'customer_id');
     }
+
     public function detail()
     {
         return $this->hasMany('App\Detail', 'order_id');

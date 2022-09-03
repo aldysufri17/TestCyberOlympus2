@@ -6,7 +6,7 @@
         <div class="col-lg-12">
             <div class="card mb-5">
                 <div class="page-header-content header-elements-md-inline">
-                    <h4 class="font-weight-bold text-center my-5">TOP 10 Customer</h4>
+                    <h4 class="font-weight-bold text-center my-5">TOP 10 CUSTOMER ORDER</h4>
                 </div>
                 <div class="pt-2 pr-1 pl-1 table-responsive table-light col-sm-12 ">
                     <table class="table table-light table-striped table-border">
@@ -16,7 +16,6 @@
                                 <th>Customer Id</th>
                                 <th>Nama Customer</th>
                                 <th>Jumlah Pembelian</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,9 +25,6 @@
                                 <td>{{$data->customer_id}}</td>
                                 <td>{{$data->name}}</td>
                                 <td>{{$data->total}}</td>
-                                <td> <a class="btn btn-sm btn-success" style="text-decoration:none;"
-                                        href="{{ route('detail', $data->customer_id) }}">Detail
-                                    </a></td>
                             </tr>
                             @endforeach
                         </tbody>

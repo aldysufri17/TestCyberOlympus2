@@ -20,8 +20,12 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 // product
 Route::get('/product', 'HomeController@product')->name('product');
-Route::get('/detail/{id}', 'HomeController@detailProduct')->name('detail');
 // customer
 Route::get('/customer', 'HomeController@customer')->name('customer');
 Route::get('/agent', 'HomeController@agent')->name('agent');
-// Route::get('/detail/{id}', 'HomeController@detailProduct')->name('detail');
+// orders
+Route::get('/orders', 'HomeController@order')->name('orders');
+Route::get('/order/detail/{id}', 'HomeController@orderDetail')->name('order.detail');
+// Search
+Route::get('/search', 'HomeController@search');
+Route::get('/filter', 'HomeController@filter');
